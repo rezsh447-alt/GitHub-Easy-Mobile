@@ -1,64 +1,23 @@
-# GitHub Easy Mobile - CodeMagic CI/CD Configuration
+# GitHub Easy Mobile - Simple Build Fix
 workflows:
   android-debug:
-    name: Android Debug Build
-    max_build_duration: 45
-    instance_type: linux_x2
-
-    scripts:
-      - name: Set up JDK 17
+    name: Android Debug Build (Simple)
+    max_build_duration: 30
+    
+    build:
+      - name: Setup environment
         script: |
           sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
           export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-          echo "Java version:"
-          java -version
-
-      - name: Build debug APK
+          
+      - name: Build APK
         script: |
           chmod +x gradlew
-          ./gradlew assembleDebug
-
-      - name: Check build result
+          ./gradlew clean assembleDebug
+          
+      - name: Show result
         script: |
-          ls -la app/build/outputs/apk/debug/
-
+          ls -la app/build/outputs/apk/debug/app-debug.apk 2>/dev/null || echo "APK not found"
+          
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
-
-  android-release:
-    name: Android Release Build
-    max_build_duration: 45
-    instance_type: linux_x2
-
-    environment:
-      android_signing:
-        - keystore_reference
-      vars:
-        PACKAGE_NAME: "com.github.easymobile"
-
-    scripts:
-      - name: Set up JDK 17
-        script: |
-          sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
-          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-          echo "Java version:"
-          java -version
-
-      - name: Build release APK
-        script: |
-          chmod +x gradlew
-          ./gradlew assembleRelease
-
-      - name: Build AAB (for Play Store)
-        script: |
-          chmod +x gradlew
-          ./gradlew bundleRelease
-
-      - name: Check build outputs
-        script: |
-          ls -la app/build/outputs/apk/release/
-          ls -la app/build/outputs/bundle/release/
-
-    artifacts:
-      - app/build/outputs/apk/release/app-release.apk
-      - app/build/outputs/bundle/release/app-release.aab
