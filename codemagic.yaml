@@ -3,67 +3,62 @@ workflows:
   android-debug:
     name: Android Debug Build
     max_build_duration: 45
-    instance_type: android_medium
-    
-    # Build steps
-    build:
+    instance_type: linux_x2
+
+    scripts:
       - name: Set up JDK 17
         script: |
           sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
           export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
           echo "Java version:"
           java -version
-          
+
       - name: Build debug APK
         script: |
           chmod +x gradlew
           ./gradlew assembleDebug
-          
+
       - name: Check build result
         script: |
           ls -la app/build/outputs/apk/debug/
 
-    # Artifacts - Only APK
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
 
   android-release:
     name: Android Release Build
     max_build_duration: 45
-    instance_type: android_large
-    
-    # Environment variables for release build
+    instance_type: linux_x2
+
     environment:
       android_signing:
         - keystore_reference
       vars:
         PACKAGE_NAME: "com.github.easymobile"
-      
-    # Build steps
-    build:
+
+    scripts:
       - name: Set up JDK 17
         script: |
           sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
           export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
           echo "Java version:"
           java -version
-          
+
       - name: Build release APK
         script: |
           chmod +x gradlew
           ./gradlew assembleRelease
-          
+
       - name: Build AAB (for Play Store)
         script: |
           chmod +x gradlew
           ./gradlew bundleRelease
-          
+
       - name: Check build outputs
         script: |
           ls -la app/build/outputs/apk/release/
           ls -la app/build/outputs/bundle/release/
 
-    # Artifacts - Both APK and AAB
     artifacts:
       - app/build/outputs/apk/release/app-release.apk
       - app/build/outputs/bundle/release/app-release.aab
