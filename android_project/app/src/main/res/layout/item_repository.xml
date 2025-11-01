@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/GitHubCard"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Repository Name and Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/repoIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_folder"
+                app:tint="@color/primary_500"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/repoName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.GitHub.Body1"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                tools:text="repository-name" />
+
+            <!-- Language Badge -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/languageChip"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:textSize="10sp"
+                android:textColor="@color/text_secondary"
+                android:visibility="gone"
+                style="@style/Widget.Material3.Chip.Filter"
+                tools:text="Kotlin" />
+
+        </LinearLayout>
+
+        <!-- Repository Description -->
+        <TextView
+            android:id="@+id/repoDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.GitHub.Caption"
+            android:textColor="@color/text_secondary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:visibility="gone"
+            tools:text="Repository description here" />
+
+        <!-- Repository Stats -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/repoStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.GitHub.Caption"
+                android:textColor="@color/text_secondary"
+                android:drawablePadding="4dp"
+                app:drawableLeftCompat="@drawable/ic_star"
+                tools:text="123" />
+
+            <TextView
+                android:id="@+id/repoForks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.GitHub.Caption"
+                android:textColor="@color/text_secondary"
+                android:drawablePadding="4dp"
+                app:drawableLeftCompat="@drawable/ic_git_branch"
+                tools:text="45" />
+
+            <TextView
+                android:id="@+id/repoUpdated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAppearance="@style/TextAppearance.GitHub.Caption"
+                android:textColor="@color/text_secondary"
+                tools:text="Updated 2 days ago" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

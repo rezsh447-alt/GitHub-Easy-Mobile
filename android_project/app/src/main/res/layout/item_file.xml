@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!-- File Icon -->
+    <ImageView
+        android:id="@+id/fileIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        app:tint="@color/text_secondary"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_file" />
+
+    <!-- File/Folder Name -->
+    <TextView
+        android:id="@+id/fileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAppearance="@style/TextAppearance.GitHub.Body1"
+        android:textColor="@color/text_primary"
+        android:ellipsize="start"
+        tools:text="file_name.py" />
+
+    <!-- Git Status Indicator -->
+    <ImageView
+        android:id="@+id/gitStatusIcon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_circle" />
+
+    <!-- File Size (for files) -->
+    <TextView
+        android:id="@+id/fileSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.GitHub.Caption"
+        android:textColor="@color/text_secondary"
+        android:visibility="gone"
+        tools:text="2.5 KB" />
+
+    <!-- Selection Indicator -->
+    <ImageView
+        android:id="@+id/selectionIndicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_check_circle"
+        android:visibility="gone"
+        app:tint="@color/primary_500"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
